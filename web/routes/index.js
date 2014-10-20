@@ -6,6 +6,14 @@ router.get('/', function(req, res) {
   res.render('index', { title: 'Occupancy Sensing and Visualization' });
 });
 
+router.get('/g', function(req, res) {
+  res.send('get response');
+});
+
+router.post('/p', function(req, res) {
+  res.send('post response');
+});
+
 // router.post('/updateoccupancy', function(req, res) {
 
 // });

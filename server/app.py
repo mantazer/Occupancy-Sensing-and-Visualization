@@ -4,8 +4,13 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return 'cc3200'
+    return 'Occupancy Detection and Visualization'
+
+@app.route('/ping', methods=['POST'])
+def ping():
+    if request.method == 'POST':
+        print request.headers
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0')
 

@@ -10,6 +10,7 @@ def index():
 def ping():
     if request.method == 'POST':
         print request.headers
+        return 'data received'
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')

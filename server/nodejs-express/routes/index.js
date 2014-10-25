@@ -10,4 +10,15 @@ router.post('/ping', function(req, res) {
   res.send('data received');
 });
 
+// initial functionality
+router.post('/update', function(req, res) {
+  console.log(req.headers);
+  // receive building_id, room_id, occupied_flag
+});
+
+router.get('/latest', function(req, res) {
+  console.log(req.headers);
+  // return json-encoded values
+});
+
 module.exports = router;

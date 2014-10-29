@@ -1,16 +1,21 @@
 #include <SPI.h>
 #include <WiFi.h>
 
-char ssid[] = "";
+char ssid[] = "wahoo";
 char pass[] = "";
 int status = WL_IDLE_STATUS;
 
 WiFiClient client;
-char server[] = "54.191.19.173";
-int port = 5000;
+char server[] = "";
+int port = 3000;
 
 unsigned long last_connection_time = 0;
 const unsigned long posting_interval = 10L * 1000L;
+
+int pir_pin = 28; // CC3200 PIN 53
+int pir_val = 0;
+
+int motion_flag = 0;
 
 void setup() {
   Serial.begin(57600);
@@ -21,8 +26,11 @@ void setup() {
   }
     
   check_firmware();
-  connect_wpa(ssid, pass);
+//  connect_wpa(ssid, pass);
+  connect_unprotected(ssid);
   
+  pinMode(pir_pin, INPUT);
+  attachInterrupt(pir_pin, motion_triggered, FALLING);
 }
 
 void loop() {
@@ -31,9 +39,18 @@ void loop() {
     Serial.write(c);
   }
   
-  if (millis() - last_connection_time > posting_interval) {
+  if (motion_flag) {
+    Serial.println("Motion detected");
     http_request();
+    motion_flag = 0;
   }
+  
+//  if (millis() - last_connection_time > posting_interval) {
+//    int pir_val = digitalRead(pir_pin);
+//    Serial.println(pir_val);
+//    http_request();
+//  }
+
 }
 
 int is_shield_present() {
@@ -78,18 +95,20 @@ void http_request() {
   client.stop();
   
   if (client.connect(server, port)) {
-    Serial.println("connecting...");
+    Serial.println("Sending request...");
 
     client.println("POST /ping HTTP/1.1");
     client.println("Host: http://54.191.19.173/");
     client.println("User-Agent: ArduinoWiFi/1.1");
+    client.println("CC3200-ID: 001");
+    client.println("Occupied: 1");
     client.println("Connection: close");
     client.println();
 
     last_connection_time = millis();
   }
   else {
-    Serial.println("connection failed");
+    Serial.println("Connection failed");
   }
   
 }
@@ -147,3 +166,8 @@ void printCurrentNet() {
   Serial.println(encryption,HEX);
   Serial.println();
 }
+
+void motion_triggered() {
+  motion_flag = 1;
+}
+

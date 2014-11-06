@@ -16,6 +16,10 @@ def index():
 def ping():
     if request.method == 'POST':
         print request.headers
+
+        cc3200_id = request.headers.get('cc3200-id')
+        occupied = request.headers.get('occupied')
+
         return 'data received'
 
 if __name__ == '__main__':

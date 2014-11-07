@@ -1,5 +1,6 @@
+import time
+
 class Node:
-    def __init__(self, node_id, occupied):
-        self.node_id = None
-        self.occupied = 0
+    def __init__(self, node_id):
+        self.node_id = node_id
 

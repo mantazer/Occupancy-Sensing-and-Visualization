@@ -7,14 +7,21 @@ class MongoDB:
     db = client.db
     node_collection = db.node_collection
 
-    def add_if_not_exists(self, node):
-        if self.node_collection.find_one({'cc3200_id': node.node_id}) is None:
-            node_data = {'node_id': node.node_id, 'occupied': node.occupied}
+    def add_or_update(self, node):
+        if self.node_collection.find_one({'node_id': node.node_id}) is None:
+            node_data = {'node_id': node.node_id, 'last_triggered': time.time(),
+            'is_vacant': 0}
             node_id = self.node_collection.insert(node_data)
-            return node_id
+            return True
         else:
-            return None
-    
+            write_ack = self.node_collection.update({'node_id': node.node_id}, {'$set':
+            {'last_triggered': time.time(), 'is_vacant': 0}}, upsert=False)
+            if write_ack:
+                return True
+            return False
+        return False
+
+
     def find_vacant(self):
         pass
 

@@ -101,7 +101,6 @@ void http_request() {
     client.println("Host: http://54.191.19.173/");
     client.println("User-Agent: ArduinoWiFi/1.1");
     client.println("node-id: 1");
-    client.println("is-vacant: 0");
     client.println("Connection: close");
     client.println();
 

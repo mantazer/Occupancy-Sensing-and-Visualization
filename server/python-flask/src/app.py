@@ -13,7 +13,7 @@ mongodb = MongoDB()
 
 @app.route('/')
 def index():
-    return render_template('MainPage.html')
+    return render_template('index.html')
 
 @app.route('/ping', methods=['POST'])
 def ping():

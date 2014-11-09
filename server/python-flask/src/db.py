@@ -23,5 +23,17 @@ class MongoDB:
 
 
     def find_vacant(self):
-        pass
+        while True:
+            nodes = self.node_collection.find()
+            for node in nodes:
+                node_id = node.get('node_id')
+                last_triggered = node.get('last_triggered')
+                is_vacant = node.get('is_vacant')
+                if time.time() - float(last_triggered) > 5:
+                    if is_vacant == 0:
+                        # print notice
+                        self.node_collection.update({'node_id': node_id},
+                        {'$set': {'is_vacant': 1}}, upsert=False)
+                        # check for successful update
+            time.sleep(5)
 

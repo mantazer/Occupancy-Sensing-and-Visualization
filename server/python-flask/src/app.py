@@ -13,7 +13,7 @@ mongodb = MongoDB()
 
 @app.route('/')
 def index():
-    return 'Occupancy Detection and Visualization'
+    return render_template('MainPage.html')
 
 @app.route('/ping', methods=['POST'])
 def ping():

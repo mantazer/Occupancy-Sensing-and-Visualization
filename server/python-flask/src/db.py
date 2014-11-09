@@ -12,7 +12,9 @@ class MongoDB:
             node_data = {'node_id': node.node_id, 'last_triggered': time.time(),
             'is_vacant': 0}
             node_id = self.node_collection.insert(node_data)
-            return True
+            if node_id:
+                return True
+            return False
         else:
             write_ack = self.node_collection.update({'node_id': node.node_id}, {'$set':
             {'last_triggered': time.time(), 'is_vacant': 0}}, upsert=False)
@@ -21,7 +23,6 @@ class MongoDB:
             return False
         return False
 
-
     def find_vacant(self):
         while True:
             nodes = self.node_collection.find()
@@ -29,11 +30,12 @@ class MongoDB:
                 node_id = node.get('node_id')
                 last_triggered = node.get('last_triggered')
                 is_vacant = node.get('is_vacant')
-                if time.time() - float(last_triggered) > 5:
+                
+                if time.time() - float(last_triggered) > 10:
                     if is_vacant == 0:
-                        # print notice
-                        self.node_collection.update({'node_id': node_id},
-                        {'$set': {'is_vacant': 1}}, upsert=False)
-                        # check for successful update
+                        print '{} is vacant'.format(node_id)
+                        write_ack = self.node_collection.update({'node_id':
+                        node_id}, {'$set': {'is_vacant': 1}}, upsert=False)
+
             time.sleep(5)
 

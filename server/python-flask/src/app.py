@@ -31,6 +31,13 @@ def ping():
             return '200'
         return '500'
 
+@app.route('/vacant', methods=['GET'])
+def vacant():
+    if request.method == 'GET':
+        vacant_nodes = mongodb.get_vacant()
+        #return as json
+        pass
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
 

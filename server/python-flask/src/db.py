@@ -39,3 +39,13 @@ class MongoDB:
 
             time.sleep(5)
 
+    def get_vacant(self):
+        vacant_nodes = {}
+        id_list = []
+        nodes = self.node_collection.find()
+        for node in nodes:
+            if node.get('is_vacant') == 1:
+                id_list.append(node.get('node_id'))
+        vacant_nodes['vacant'] = id_list
+        return vacant_nodes
+

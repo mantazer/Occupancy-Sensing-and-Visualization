@@ -35,7 +35,7 @@ def ping():
 def vacant():
     if request.method == 'GET':
         vacant_nodes = mongodb.get_vacant()
-        #return as json
+        return json.dumps(vacant_nodes)
         pass
 
 if __name__ == '__main__':

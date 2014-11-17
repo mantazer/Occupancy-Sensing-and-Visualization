@@ -7,7 +7,7 @@ int status = WL_IDLE_STATUS;
 
 WiFiClient client;
 char server[] = "";
-int port = 3000;
+int port = 5000;
 
 unsigned long last_connection_time = 0;
 const unsigned long posting_interval = 10L * 1000L;

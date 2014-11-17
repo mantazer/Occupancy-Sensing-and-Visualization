@@ -1,5 +1,3 @@
-# TODO: Add one-time registration logic
-
 from db import MongoDB
 from flask import Flask, request, render_template
 from model import Node

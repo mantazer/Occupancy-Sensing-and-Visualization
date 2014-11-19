@@ -19,9 +19,8 @@ def index():
 @app.route('/ping', methods=['POST'])
 def ping():
     if request.method == 'POST':
-        print request.headers
-
         node_id = request.headers.get('node-id')
+        print 'Incoming ping from node ' + node_id
         incoming_node = Node(node_id)
         success = mongodb.add_or_update(incoming_node)
 

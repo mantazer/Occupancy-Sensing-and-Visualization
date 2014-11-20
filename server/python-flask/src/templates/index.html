@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Agency - Start Bootstrap Theme</title>
+    <title>Rice Hall Occupancy</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../static/css/bootstrap.min.css" rel="stylesheet">
@@ -98,26 +98,47 @@
                 <div class="col-md-4">
                     <span class="fa-stack fa-4x">
                         <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
+                        <i class="fa fa-barcode fa-stack-1x fa-inverse"></i>
                     </span>
-                    <h4 class="service-heading">E-Commerce</h4>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                    <h4 class="service-heading">Room Number</h4>
+                    <h5> 
+                        {% for room in rooms %}
+                            <div> {{ room.RoomID }} </div>
+                            <br>
+                        {% endfor %} 
+                    </h5>
                 </div>
                 <div class="col-md-4">
                     <span class="fa-stack fa-4x">
                         <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
+                        <i class="fa fa-building-o fa-stack-1x fa-inverse"></i>
                     </span>
-                    <h4 class="service-heading">Responsive Design</h4>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                    <h4 class="service-heading">Room Location</h4>
+                    <h5> 
+                        {% for room in rooms %}
+                            <div> {{ room.RoomLocation }} </div>
+                            <br>
+                        {% endfor %} 
+                    </h5>
                 </div>
                 <div class="col-md-4">
                     <span class="fa-stack fa-4x">
                         <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
+                        <i class="fa fa-group fa-stack-1x fa-inverse"></i>
                     </span>
-                    <h4 class="service-heading">Web Security</h4>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                    <h4 class="service-heading">Occupancy Status</h4>
+                    <h5> 
+                        {% for room in rooms %}
+                            <div> 
+                                {% if not room.Occupied=="true"%}
+                                    <i class="fa fa-check-circle fa-lg" style="color: green"></i>
+                                {% else %}
+                                    <i class="fa fa-minus-circle fa-lg" style="color: red"></i>
+                                {% endif %}
+                            </div>
+                            <br>
+                        {% endfor %} 
+                    </h5>
                 </div>
             </div>
         </div>
@@ -470,8 +491,8 @@
                             <br>
                             <br>
                             <br>
-                            <p>Treehouse is a free PSD web template built by <a href="https://www.behance.net/MathavanJaya">Mathavan Jaya</a>. This is bright and spacious design perfect for people or startup companies looking to showcase their apps or other projects.</p>
-                            <p>You can download the PSD template in this portfolio sample item at <a href="http://freebiesxpress.com/gallery/treehouse-free-psd-web-template/">FreebiesXpress.com</a>.</p>
+                            <p>Amazon Web Services is the premier cloud service, with estimates that approximately 1% of all internet traffic runs through Amazon's servers. Because of the team's past experience using Amazon Web Services, as well as its price and convenience (providing an Ubuntu Linux option), we decided to setup both our web server and application server on a machine in Amazon's datacenters in Northern Virginia. </p>
+                            <p>As with any significant application, a backend server is a necessity. Since we did not have quick access to the servers from the Electrical Engineering Department within U.Va (and since these servers often have to be programmed in PHP), we decided to use Amazon Web Services.</p>
                             <ul class="list-inline">
                                 <li> <a href="http://en.wikipedia.org/wiki/Amazon_Web_Services"> <strong> More Information Here </strong> </a> </li>
                             </ul>

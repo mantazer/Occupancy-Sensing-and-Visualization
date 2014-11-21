@@ -42,7 +42,7 @@
           }
         xmlhttp.onreadystatechange=function() {
           if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-                document.getElementById("ajaxDiv").innerHTML=xmlhttp.responseText;
+                document.getElementById("services").innerHTML=xmlhttp.responseText;
             }
           }
         xmlhttp.open("GET","http://172.25.98.207:5000/ajax",true);
@@ -107,7 +107,7 @@
     </header>
 
     <!-- Services Section -->
-    <section id="services ajaxDiv">
+    <section id="services">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">

@@ -15,6 +15,7 @@ def index():
     user = {'nickname': 'Miguel'}  # fake user
     return render_template('index.html', rooms=test.get('nodes'))
 
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
 

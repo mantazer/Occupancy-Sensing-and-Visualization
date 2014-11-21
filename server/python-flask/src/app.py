@@ -20,8 +20,9 @@ def index():
 def ping():
     if request.method == 'POST':
         node_id = request.headers.get('node-id')
+        node_floor = request.headers.get('node-floor')
         print 'Incoming ping from node ' + node_id
-        incoming_node = Node(node_id)
+        incoming_node = Node(node_id, node_floor)
         success = mongodb.add_or_update(incoming_node)
 
         if success:
@@ -33,7 +34,12 @@ def vacant():
     if request.method == 'GET':
         vacant_nodes = mongodb.get_vacant()
         return json.dumps(vacant_nodes)
-        pass
+
+@app.route('/all', methods=['GET'])
+def all():
+    if request.method == 'GET':
+        all_nodes = mongodb.get_all()
+        return json.dumps(all_nodes)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)

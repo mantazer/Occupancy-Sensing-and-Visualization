@@ -58,8 +58,8 @@ class MongoDB:
         nodes = self.node_collection.find()
         for node in nodes:
             node_dict = {}
-            node_dict['node-id'] = node.get('node_id')
-            node_dict['node-floor'] = node.get('node_floor')
+            node_dict['nodeId'] = node.get('node_id')
+            node_dict['nodeFloor'] = node.get('node_floor')
             node_dict['vacant'] = node.get('is_vacant')
             node_list.append(node_dict)
         all_nodes['nodes'] = node_list

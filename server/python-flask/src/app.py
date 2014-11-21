@@ -15,7 +15,7 @@ thread.start()
 
 @app.route('/')
 def index():
-    list =
+    list = mongodb.get_all()
     return render_template('index.html', rooms=list)
 
 @app.route('/ping', methods=['POST'])

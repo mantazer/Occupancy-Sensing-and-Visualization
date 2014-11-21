@@ -132,7 +132,7 @@
                     <h5> 
                         {% for room in rooms %}
                             <div> 
-                                {% if not room.vacant==1%}
+                                {% if not room.vacant==0 %}
                                     <i class="fa fa-check-circle fa-lg" style="color: green"></i>
                                 {% else %}
                                     <i class="fa fa-minus-circle fa-lg" style="color: red"></i>

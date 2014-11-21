@@ -45,7 +45,7 @@
                 document.getElementById("ajaxDiv").innerHTML=xmlhttp.responseText;
             }
           }
-        xmlhttp.open("GET","{{ url_for('ajax') }}",true);
+        xmlhttp.open("GET","http://172.25.98.207:5000/ajax",true);
         xmlhttp.send();
         }
     </script>

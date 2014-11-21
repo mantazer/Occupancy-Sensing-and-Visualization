@@ -1,3 +1,5 @@
+// Add request timeout
+
 #include <SPI.h>
 #include <WiFi.h>
 
@@ -98,9 +100,10 @@ void http_request() {
     Serial.println("Sending request...");
 
     client.println("POST /ping HTTP/1.1");
-    client.println("Host: http://54.191.19.173/");
+    client.println("Host: http://placeholder/");
     client.println("User-Agent: ArduinoWiFi/1.1");
-    client.println("node-id: 1");
+    client.println("node-id: 304");
+    client.println("node-floor: 3rd Floor");
     client.println("Connection: close");
     client.println();
 

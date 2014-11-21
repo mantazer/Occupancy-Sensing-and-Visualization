@@ -31,7 +31,24 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-
+    <script>
+        function loadXMLDoc() {
+        var xmlhttp;
+        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+              xmlhttp=new XMLHttpRequest();
+          }
+        else {// code for IE6, IE5
+              xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+          }
+        xmlhttp.onreadystatechange=function() {
+          if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+                document.getElementById("ajaxDiv").innerHTML=xmlhttp.responseText;
+            }
+          }
+        xmlhttp.open("GET","{{ url_for('ajax') }}",true);
+        xmlhttp.send();
+        }
+    </script>
 
 </head>
 
@@ -88,7 +105,7 @@
     </header>
 
     <!-- Services Section -->
-    <section id="services">
+    <section id="services ajaxDiv">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">

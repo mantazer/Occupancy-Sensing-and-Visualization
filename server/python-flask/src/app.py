@@ -43,11 +43,6 @@ def all():
         all_nodes = mongodb.get_all()
         return json.dumps(all_nodes)
 
-@app.route('/ajax')
-def ajax():
-    list = mongodb.get_all()
-    return render_template('ajax.html', rooms=list.get('nodes'))
-
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
 

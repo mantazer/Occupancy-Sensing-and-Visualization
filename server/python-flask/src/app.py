@@ -5,6 +5,7 @@ from model import Node
 import json
 import threading
 import time
+import requests
 
 app = Flask(__name__)
 mongodb = MongoDB()
@@ -14,7 +15,8 @@ thread.start()
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    list =
+    return render_template('index.html', rooms=list)
 
 @app.route('/ping', methods=['POST'])
 def ping():

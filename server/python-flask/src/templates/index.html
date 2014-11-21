@@ -104,8 +104,8 @@
                     </span>
                     <h4 class="service-heading">Room Number</h4>
                     <h5> 
-                        {% for room in rooms.nodes %}
-                            <div> {{ room.node-id }} </div>
+                        {% for room in rooms %}
+                            <div> {{ room.nodeId }} </div>
                             <br>
                         {% endfor %} 
                     </h5>
@@ -117,8 +117,8 @@
                     </span>
                     <h4 class="service-heading">Room Location</h4>
                     <h5> 
-                        {% for room in rooms.nodes %}
-                            <div> {{ room.node-floor }} </div>
+                        {% for room in rooms %}
+                            <div> {{ room.nodeFloor }} </div>
                             <br>
                         {% endfor %} 
                     </h5>
@@ -130,9 +130,9 @@
                     </span>
                     <h4 class="service-heading">Occupancy Status</h4>
                     <h5> 
-                        {% for room in rooms.nodes %}
+                        {% for room in rooms %}
                             <div> 
-                                {% if not room.vacant=="1"%}
+                                {% if not room.vacant==1%}
                                     <i class="fa fa-check-circle fa-lg" style="color: green"></i>
                                 {% else %}
                                     <i class="fa fa-minus-circle fa-lg" style="color: red"></i>

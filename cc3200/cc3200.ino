@@ -8,7 +8,7 @@ char pass[] = "";
 int status = WL_IDLE_STATUS;
 
 WiFiClient client;
-char server[] = "";
+char server[] = "172.25.98.207";
 int port = 5000;
 
 unsigned long last_connection_time = 0;
@@ -69,7 +69,6 @@ void connect_wpa(char ssid[], char pass[]) {
      Serial.print("Attempting to connect to: ");
      Serial.println(ssid);
      status = WiFi.begin(ssid, pass);
-     delay(10000); 
    }
   Serial.print("Connected to ");
   Serial.println(ssid);
@@ -106,7 +105,8 @@ void http_request() {
     client.println("node-floor: 3rd Floor");
     client.println("Connection: close");
     client.println();
-
+    
+    delay(1000);
     last_connection_time = millis();
   }
   else {

@@ -10,11 +10,20 @@ import android.widget.Toast;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.apache.http.Header;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 
 public class RoomsActivity extends Activity {
+
+    ArrayList<Room> roomsList = new ArrayList<Room>();
+//    ArrayAdapter<Room> arrayAdapter;
+
+    Room r1 = new Room(1, 104, 0);
+    Room r2 = new Room(2, 204, 1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +47,11 @@ public class RoomsActivity extends Activity {
         if (id == R.id.action_refresh) {
             try {
                 getAllRooms();
+                for (Room r : roomsList) {
+                    Log.d("ROOM: ", r.number + "");
+                }
             } catch(JSONException e) {
-                Log.d("JSONException: ", "getAllRooms()");
+                Log.d("JSONException: ", "onOptionsItemSelected");
             }
             return true;
         }
@@ -50,7 +62,20 @@ public class RoomsActivity extends Activity {
         RestClient.getAll(null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                Toast.makeText(getApplicationContext(), "object", Toast.LENGTH_SHORT).show();
+                try {
+                    JSONArray roomArray = response.getJSONArray("nodes");
+                    for (int i = 0; i < roomArray.length(); i++) {
+                        JSONObject roomObj = roomArray.getJSONObject(i);
+                        int floor = roomObj.getInt("node-floor");
+                        int number = roomObj.getInt("node-id");
+                        int vacant = roomObj.getInt("vacant");
+
+                        Room room = new Room(floor, number, vacant);
+                        roomsList.add(room);
+                    }
+                } catch(Exception e) {
+                    Log.d("JSONException", "getAllRooms");
+                }
             }
         });
     }

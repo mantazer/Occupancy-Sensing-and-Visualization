@@ -1,6 +1,9 @@
 package muntaserahmed.ricerooms;
 
-public class Room {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Room implements Parcelable {
 
     String floor;
     int number;
@@ -35,5 +38,32 @@ public class Room {
     public String toString() {
         return this.floor + " - " + this.number + " - " + this.vacant;
     }
+
+    public Room(Parcel in) {
+        floor = in.readString();
+        number = in.readInt();
+        vacant = in.readInt();
+    }
+
+    public int describeContents() {
+        return 0;
+    }
+
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeString(floor);
+        out.writeInt(number);
+        out.writeInt(vacant);
+    }
+
+    public static final Parcelable.Creator<Room> CREATOR
+            = new Parcelable.Creator<Room>() {
+        public Room createFromParcel(Parcel in) {
+            return new Room(in);
+        }
+
+        public Room[] newArray(int size) {
+            return new Room[size];
+        }
+    };
 
 }

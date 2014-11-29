@@ -2,12 +2,12 @@ package muntaserahmed.ricerooms;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -19,35 +19,24 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 
-public class RoomsActivity extends Activity {
-
-    ListView roomsListView;
-
-    ArrayList<Room> roomsList = new ArrayList<Room>();
-    ArrayAdapter<Room> roomArrayAdapter;
+public class SplashActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rooms);
-
-        roomsListView = (ListView) findViewById(R.id.roomsListView);
-
-        Intent i = getIntent();
-        roomsList = i.getParcelableArrayListExtra("rooms");
-
-        roomArrayAdapter = new ArrayAdapter<Room>(
-                this,
-                R.layout.row,
-                roomsList
-        );
-        roomsListView.setAdapter(roomArrayAdapter);
+        setContentView(R.layout.activity_splash);
+        try {
+            requestAndSend();
+        } catch (JSONException e) {
+            Log.d("JSONException", "onCreate: requestAndSend");
+        }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.rooms, menu);
+        getMenuInflater().inflate(R.menu.splash, menu);
         return true;
     }
 
@@ -56,36 +45,17 @@ public class RoomsActivity extends Activity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_refresh) {
-            refresh();
-            return true;
-        }
         return super.onOptionsItemSelected(item);
     }
 
-    public void refresh() {
-        try {
-            getAllRooms();
-        } catch (JSONException e) {
-            Log.d("JSONException", "refresh");
-        }
-
-        roomArrayAdapter = new ArrayAdapter<Room>(
-                this,
-                R.layout.row,
-                roomsList
-        );
-        roomsListView.setAdapter(roomArrayAdapter);
-    }
-
-    public void getAllRooms() throws JSONException {
+    public void requestAndSend() throws JSONException {
         RestClient.getAll(null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
+                    ArrayList<Room> roomsToSend = new ArrayList<Room>();
                     JSONArray roomArray = response.getJSONArray("nodes");
-                    roomsList.clear();
+                    roomsToSend.clear();
                     for (int i = 0; i < roomArray.length(); i++) {
                         JSONObject roomObj = roomArray.getJSONObject(i);
 
@@ -94,12 +64,24 @@ public class RoomsActivity extends Activity {
                         int vacant = roomObj.getInt("vacant");
 
                         Room room = new Room(floor, number, vacant);
-                        roomsList.add(room);
+                        roomsToSend.add(room);
                     }
+
+                    Intent i = new Intent(SplashActivity.this, RoomsActivity.class);
+                    i.putParcelableArrayListExtra("rooms", roomsToSend);
+                    startActivity(i);
+
                 } catch(Exception e) {
                     Log.d("JSONException", "getAllRooms");
                 }
             }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                Toast.makeText(getApplicationContext(), "Request failed", Toast.LENGTH_SHORT).show();
+            }
+
         });
     }
+
 }

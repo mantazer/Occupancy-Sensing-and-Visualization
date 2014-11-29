@@ -5,7 +5,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -19,16 +20,17 @@ import java.util.ArrayList;
 
 public class RoomsActivity extends Activity {
 
-    ArrayList<Room> roomsList = new ArrayList<Room>();
-//    ArrayAdapter<Room> arrayAdapter;
+    ListView roomsListView;
 
-    Room r1 = new Room(1, 104, 0);
-    Room r2 = new Room(2, 204, 1);
+    ArrayList<Room> roomsList = new ArrayList<Room>();
+    ArrayAdapter<Room> roomArrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rooms);
+
+        roomsListView = (ListView) findViewById(R.id.roomsListView);
     }
 
     @Override
@@ -45,17 +47,25 @@ public class RoomsActivity extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_refresh) {
-            try {
-                getAllRooms();
-                for (Room r : roomsList) {
-                    Log.d("ROOM: ", r.number + "");
-                }
-            } catch(JSONException e) {
-                Log.d("JSONException: ", "onOptionsItemSelected");
-            }
+            refresh();
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void refresh() {
+        try {
+            getAllRooms();
+        } catch (JSONException e) {
+            Log.d("JSONException", "refresh");
+        }
+
+        roomArrayAdapter = new ArrayAdapter<Room>(
+                this,
+                R.layout.row,
+                roomsList
+        );
+        roomsListView.setAdapter(roomArrayAdapter);
     }
 
     public void getAllRooms() throws JSONException {
@@ -64,10 +74,12 @@ public class RoomsActivity extends Activity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
                     JSONArray roomArray = response.getJSONArray("nodes");
+                    roomsList.clear();
                     for (int i = 0; i < roomArray.length(); i++) {
                         JSONObject roomObj = roomArray.getJSONObject(i);
-                        int floor = roomObj.getInt("node-floor");
-                        int number = roomObj.getInt("node-id");
+
+                        String floor = roomObj.getString("nodeFloor");
+                        int number = roomObj.getInt("nodeId");
                         int vacant = roomObj.getInt("vacant");
 
                         Room room = new Room(floor, number, vacant);

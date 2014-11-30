@@ -1,8 +1,11 @@
 package muntaserahmed.ricerooms;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -40,6 +43,13 @@ public class RoomsActivity extends Activity {
         window.setStatusBarColor(activity.getResources().getColor(R.color.darker_gold));
 
         getActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.gold));
+
+        SpannableString s = new SpannableString(getResources().getString(R.string.app_name));
+        s.setSpan(new TypefaceSpan(this, "Lobster_1.3.otf"), 0, s.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        ActionBar actionBar = getActionBar();
+        actionBar.setTitle(s);
 
         roomsListView = (ListView) findViewById(R.id.roomsListView);
 

@@ -2,6 +2,7 @@ package muntaserahmed.ricerooms;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.Html;
 
 public class Room implements Parcelable {
 
@@ -36,7 +37,15 @@ public class Room implements Parcelable {
     }
 
     public String toString() {
-        return this.floor + " - " + this.number + " - " + this.vacant;
+        String flag = "";
+
+        if (this.vacant == 1) {
+            flag = "<font color='#27ae60'>Available</font>";
+        } else {
+            flag = "<font color='#c0392b'>Occupied</font>";
+        }
+
+        return this.floor + ", Room " + this.number + " - " + Html.fromHtml(flag);
     }
 
     public Room(Parcel in) {

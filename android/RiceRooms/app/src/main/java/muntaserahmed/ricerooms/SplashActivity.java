@@ -2,11 +2,13 @@ package muntaserahmed.ricerooms;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.AsyncTask;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -25,6 +27,11 @@ public class SplashActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+        Typeface lobster = Typeface.createFromAsset(getAssets(), "fonts/Lobster_1.3.otf");
+        TextView content = (TextView) findViewById(R.id.fullscreen_content);
+        content.setTypeface(lobster);
+
         try {
             requestAndSend();
         } catch (JSONException e) {
@@ -66,7 +73,7 @@ public class SplashActivity extends Activity {
                         Room room = new Room(floor, number, vacant);
                         roomsToSend.add(room);
                     }
-
+                    SystemClock.sleep(2000);
                     Intent i = new Intent(SplashActivity.this, RoomsActivity.class);
                     i.putParcelableArrayListExtra("rooms", roomsToSend);
                     startActivity(i);

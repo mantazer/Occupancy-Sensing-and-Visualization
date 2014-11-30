@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Rice Rooms</string>
-    <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_splash">Rice Rooms</string>
 
     <string name="splash_screen_title">Rice Rooms</string>
 

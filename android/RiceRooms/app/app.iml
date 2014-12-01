@@ -78,14 +78,9 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/symbols" />
       <excludeFolder url="file://$MODULE_DIR$/build/outputs" />
     </content>
-<<<<<<< HEAD
-    <orderEntry type="jdk" jdkName="Android API 20 Platform" jdkType="Android SDK" />
-    <orderEntry type="sourceFolder" forTests="false" />
-=======
     <orderEntry type="jdk" jdkName="Android API 21 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="android-async-http-1.4.5" level="project" />
->>>>>>> 167a61f8e63d7f570954951f3fccb121f5f3a854
   </component>
 </module>
 

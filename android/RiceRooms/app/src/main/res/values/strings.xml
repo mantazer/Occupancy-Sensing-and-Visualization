@@ -2,14 +2,9 @@
 <resources>
 
     <string name="app_name">Rice Rooms</string>
-<<<<<<< HEAD
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-=======
     <string name="title_activity_splash">Rice Rooms</string>
 
     <string name="splash_screen_title">Rice Rooms</string>
 
->>>>>>> 167a61f8e63d7f570954951f3fccb121f5f3a854
 
 </resources>

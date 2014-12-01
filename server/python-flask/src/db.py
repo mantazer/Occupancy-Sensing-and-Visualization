@@ -62,6 +62,10 @@ class MongoDB:
             node_dict['nodeFloor'] = node.get('node_floor')
             node_dict['vacant'] = node.get('is_vacant')
             node_list.append(node_dict)
+<<<<<<< HEAD
         all_nodes['nodes'] = node_list
+=======
+        all_nodes['nodes'] = sorted(node_list)
+>>>>>>> 167a61f8e63d7f570954951f3fccb121f5f3a854
         return all_nodes
 

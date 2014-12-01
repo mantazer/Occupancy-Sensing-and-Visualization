@@ -2,14 +2,32 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="muntaserahmed.ricerooms" >
 
+<<<<<<< HEAD
+=======
+    <uses-permission android:name="android.permission.INTERNET" />
+
+>>>>>>> 167a61f8e63d7f570954951f3fccb121f5f3a854
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
+<<<<<<< HEAD
             android:name=".StatusActivity"
             android:label="@string/app_name" >
+=======
+            android:name=".RoomsActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+
+        </activity>
+        <activity
+            android:name=".SplashActivity"
+            android:label="@string/title_activity_splash"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar" >
+>>>>>>> 167a61f8e63d7f570954951f3fccb121f5f3a854
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

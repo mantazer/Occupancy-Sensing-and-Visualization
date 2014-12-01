@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="gold" type="color">#fed136</item>
+    <item name="darker_gold" type="color">#cb9e03</item>
+
+    <item name="white" type="color">#ffffff</item>
+    <item name="black" type="color">#000000</item>
+
+</resources>

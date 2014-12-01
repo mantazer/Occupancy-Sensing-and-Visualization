@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
+<<<<<<< HEAD
     compileSdkVersion 20
     buildToolsVersion "20.0.0"
 
@@ -8,6 +9,15 @@ android {
         applicationId "muntaserahmed.ricerooms"
         minSdkVersion 19
         targetSdkVersion 20
+=======
+    compileSdkVersion 21
+    buildToolsVersion "21.1.1"
+
+    defaultConfig {
+        applicationId "muntaserahmed.ricerooms"
+        minSdkVersion 21
+        targetSdkVersion 21
+>>>>>>> 167a61f8e63d7f570954951f3fccb121f5f3a854
         versionCode 1
         versionName "1.0"
     }
@@ -21,4 +31,8 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+<<<<<<< HEAD
+=======
+    compile 'com.loopj.android:android-async-http:1.4.5'
+>>>>>>> 167a61f8e63d7f570954951f3fccb121f5f3a854
 }

@@ -3,7 +3,7 @@ package muntaserahmed.ricerooms;
 import com.loopj.android.http.*;
 
 public class RestClient {
-    private static final String BASE_URL = "http://192.168.1.20:5000/";
+    private static final String BASE_URL = "http://172.25.203.23:5000/";
 
     private static AsyncHttpClient client = new AsyncHttpClient();
 

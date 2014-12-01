@@ -8,7 +8,7 @@ char pass[] = "";
 int status = WL_IDLE_STATUS;
 
 WiFiClient client;
-char server[] = "172.25.98.207";
+char server[] = "54.148.64.121";
 int port = 5000;
 
 unsigned long last_connection_time = 0;
